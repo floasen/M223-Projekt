@@ -33,4 +33,12 @@ public class User {
 
     @ManyToMany(fetch = jakarta.persistence.FetchType.LAZY)
     private Set<Role> roles = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(
+        name = "favorites",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "motorcycle_id")
+    )
+    private Set<Motorcycle> favoriteMotorcycles = new HashSet<>();
 }
