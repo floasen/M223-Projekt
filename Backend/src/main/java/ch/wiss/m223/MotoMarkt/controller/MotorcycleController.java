@@ -1,6 +1,7 @@
 package ch.wiss.m223.MotoMarkt.controller;
 
 import ch.wiss.m223.MotoMarkt.DTOs.MotorcycleCreateRequest;
+import ch.wiss.m223.MotoMarkt.DTOs.MotorcycleDTO;
 import ch.wiss.m223.MotoMarkt.model.Motorcycle;
 import ch.wiss.m223.MotoMarkt.model.User;
 import ch.wiss.m223.MotoMarkt.repository.UserRepository;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Set;
@@ -25,29 +27,30 @@ public class MotorcycleController {
     @Autowired
     private UserRepository userRepository;
 
+
     private User getCurrentUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = ((UserDetailsImpl) auth.getPrincipal()).getUsername();
         return userRepository.findByUsername(username).orElseThrow();
     }
 
-    @GetMapping
-    public List<Motorcycle> getAll() {
+    @GetMapping("/public")
+    public List<MotorcycleDTO> getAll() {
         return motorcycleService.getAllVisibleMotorcycles();
     }
 
     @GetMapping("/mine")
-    public List<Motorcycle> getMyMotorcycles() {
+    public List<MotorcycleDTO> getMyMotorcycles() {
         return motorcycleService.getMyMotorcycles(getCurrentUser());
     }
 
     @PostMapping
-    public Motorcycle create(@RequestBody MotorcycleCreateRequest request) {
-        return motorcycleService.createMotorcycle(request, getCurrentUser());
-    }
+    public ResponseEntity<MotorcycleDTO> create(@RequestBody MotorcycleCreateRequest request) {
+        return ResponseEntity.ok().body(motorcycleService.createMotorcycle(request, getCurrentUser()));
+}
 
     @PutMapping("/{id}")
-    public Motorcycle update(@PathVariable Long id, @RequestBody MotorcycleCreateRequest request) {
+    public MotorcycleDTO update(@PathVariable Long id, @RequestBody MotorcycleCreateRequest request) {
         return motorcycleService.updateMotorcycle(id, request, getCurrentUser());
     }
 

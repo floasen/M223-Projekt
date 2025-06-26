@@ -11,6 +11,8 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 
 @Entity
 @Getter 
@@ -42,3 +44,4 @@ public class User {
     )
     private Set<Motorcycle> favoriteMotorcycles = new HashSet<>();
 }
+

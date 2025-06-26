@@ -47,7 +47,7 @@ public class SecurityConfiguration {
     return new BCryptPasswordEncoder();
   }
  
-  private static final String[] EVERYONE = { "/api/auth/**", "/public/**" };
+  private static final String[] EVERYONE = { "/api/auth/**", "/public/**","/api/motorcycles/public" };
  
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

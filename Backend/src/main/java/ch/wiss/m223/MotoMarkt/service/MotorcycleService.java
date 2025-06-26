@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import ch.wiss.m223.MotoMarkt.DTOs.MotorcycleCreateRequest;
+import ch.wiss.m223.MotoMarkt.DTOs.MotorcycleDTO;
 import ch.wiss.m223.MotoMarkt.model.Motorcycle;
 import ch.wiss.m223.MotoMarkt.model.User;
 import ch.wiss.m223.MotoMarkt.repository.MotorcycleRepository;
@@ -23,28 +24,29 @@ public class MotorcycleService {
     @Autowired
     private UserRepository userRepository;
 
-    public List<Motorcycle> getAllVisibleMotorcycles() {
-        return motorcycleRepository.findByIsBlockedFalse();
+    public List<MotorcycleDTO> getAllVisibleMotorcycles() {
+        return motorcycleRepository.findByIsBlockedFalse().stream().map(this::toDto).toList();
     }
 
-    public List<Motorcycle> getMyMotorcycles(User currentUser) {
-        return motorcycleRepository.findBySeller(currentUser);
+    public List<MotorcycleDTO> getMyMotorcycles(User currentUser) {
+        return motorcycleRepository.findBySeller(currentUser).stream().map(this::toDto).toList();
     }
 
     @Transactional // wichtig, da neue Entity + Beziehung gespeichert werden
-    public Motorcycle createMotorcycle(MotorcycleCreateRequest request, User currentUser) {
+    public MotorcycleDTO createMotorcycle(MotorcycleCreateRequest request, User currentUser) {
         Motorcycle motorcycle = new Motorcycle(
                 request.title,
                 request.description,
                 request.brand,
                 request.model,
                 currentUser
-        );
-        return motorcycleRepository.save(motorcycle);
+        ); 
+            Motorcycle saveMotorcycle = motorcycleRepository.save(motorcycle);
+            return toDto(saveMotorcycle);
     }
 
     @Transactional
-    public Motorcycle updateMotorcycle(Long id, MotorcycleCreateRequest request, User currentUser) {
+    public MotorcycleDTO updateMotorcycle(Long id, MotorcycleCreateRequest request, User currentUser) {
         Motorcycle motorcycle = motorcycleRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Not found"));
 
@@ -57,7 +59,7 @@ public class MotorcycleService {
         motorcycle.setBrand(request.brand);
         motorcycle.setModel(request.model);
 
-        return motorcycleRepository.save(motorcycle);
+        return toDto(motorcycleRepository.save(motorcycle));
     }
 
     @Transactional
@@ -98,5 +100,17 @@ public class MotorcycleService {
 
     public Set<Motorcycle> getFavorites(User user) {
         return user.getFavoriteMotorcycles();
+    }
+
+    private MotorcycleDTO toDto(Motorcycle motorcycle){
+        MotorcycleDTO motorcycleDTO = new MotorcycleDTO();
+        motorcycleDTO.setId(motorcycle.getId());
+        motorcycleDTO.setTitle(motorcycle.getTitle());
+        motorcycleDTO.setDescription(motorcycle.getDescription());
+        motorcycleDTO.setBrand(motorcycle.getBrand());
+        motorcycleDTO.setModel(motorcycle.getModel());  
+        motorcycleDTO.setSellerUsername(motorcycle.getSeller().getUsername());
+        motorcycleRepository.save(motorcycle);  
+        return motorcycleDTO;
     }
 }
