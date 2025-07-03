@@ -11,6 +11,8 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 
 @Entity
 @Getter 
@@ -34,3 +36,4 @@ public class User {
     @ManyToMany(fetch = jakarta.persistence.FetchType.LAZY)
     private Set<Role> roles = new HashSet<>();
 }
+
