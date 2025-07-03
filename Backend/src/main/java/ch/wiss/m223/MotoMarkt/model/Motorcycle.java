@@ -26,9 +26,6 @@ public class Motorcycle {
     @JoinColumn(name = "seller_id")
     private User seller;
 
-    @ManyToMany(mappedBy = "favoriteMotorcycles")
-    private Set<User> likedByUsers = new HashSet<>();
-
     public Motorcycle() {}
 
     public Motorcycle(String title, String description, String brand, String model, User seller) {

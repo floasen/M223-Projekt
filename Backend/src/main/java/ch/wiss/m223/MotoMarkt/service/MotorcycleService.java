@@ -32,6 +32,12 @@ public class MotorcycleService {
         return motorcycleRepository.findBySeller(currentUser).stream().map(this::toDto).toList();
     }
 
+    public Motorcycle getMotorcycleById(Long id) {
+    return motorcycleRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Motorcycle not found"));
+    }
+
+
     @Transactional // wichtig, da neue Entity + Beziehung gespeichert werden
     public MotorcycleDTO createMotorcycle(MotorcycleCreateRequest request, User currentUser) {
         Motorcycle motorcycle = new Motorcycle(
@@ -80,26 +86,6 @@ public class MotorcycleService {
                 .orElseThrow(() -> new RuntimeException("Not found"));
         motorcycle.setBlocked(true);
         motorcycleRepository.save(motorcycle);
-    }
-
-    @Transactional
-    public void addFavorite(User user, Long motorcycleId) {
-        Motorcycle m = motorcycleRepository.findById(motorcycleId)
-                .orElseThrow(() -> new RuntimeException("Not found"));
-        user.getFavoriteMotorcycles().add(m);
-        userRepository.save(user);
-    }
-
-    @Transactional
-    public void removeFavorite(User user, Long motorcycleId) {
-        Motorcycle m = motorcycleRepository.findById(motorcycleId)
-                .orElseThrow(() -> new RuntimeException("Not found"));
-        user.getFavoriteMotorcycles().remove(m);
-        userRepository.save(user);
-    }
-
-    public Set<Motorcycle> getFavorites(User user) {
-        return user.getFavoriteMotorcycles();
     }
 
     private MotorcycleDTO toDto(Motorcycle motorcycle){

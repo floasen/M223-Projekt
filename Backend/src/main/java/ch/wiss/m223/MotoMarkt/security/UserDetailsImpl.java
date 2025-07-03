@@ -49,6 +49,7 @@ public Collection<? extends GrantedAuthority> getAuthorities() {
 return authorities;
 }
 public Long getId() { return id; }
+
 public String getEmail() { return email; }
 @Override
 public String getPassword() { return password; }

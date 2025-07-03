@@ -63,20 +63,4 @@ public class MotorcycleController {
     public void block(@PathVariable Long id) {
         motorcycleService.blockMotorcycle(id);
     }
-
-    // Favoriten
-    @PostMapping("/{id}/favorite")
-    public void addFavorite(@PathVariable Long id) {
-        motorcycleService.addFavorite(getCurrentUser(), id);
-    }
-
-    @DeleteMapping("/{id}/favorite")
-    public void removeFavorite(@PathVariable Long id) {
-        motorcycleService.removeFavorite(getCurrentUser(), id);
-    }
-
-    @GetMapping("/favorites")
-    public Set<Motorcycle> getFavorites() {
-        return motorcycleService.getFavorites(getCurrentUser());
-    }
 }
