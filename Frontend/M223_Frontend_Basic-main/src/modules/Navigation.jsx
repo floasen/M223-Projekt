@@ -9,14 +9,11 @@ export default function Navigation() {
           <a href="/">Home</a>
         </li>
         <li>
-          <a href="/about">About</a>
+          <a href="/signupform">Signup</a>
         </li>
-        <li><a href="/public">Public</a></li>
+
         {AuthService.getCurrentUser() ? (
           <>
-          <li>
-            <a href="/private">Private</a>
-          </li>
           <li>
             <a href="/logout">Logout</a>
           </li>

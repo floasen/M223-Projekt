@@ -52,6 +52,10 @@ public class FavoriteService {
         motorcycleDTO.setDescription(motorcycle.getDescription());
         motorcycleDTO.setBrand(motorcycle.getBrand());
         motorcycleDTO.setModel(motorcycle.getModel());  
+        motorcycleDTO.setPrice(motorcycle.getPrice());
+        motorcycleDTO.setDate(motorcycle.getDate());
+        motorcycleDTO.setOdo(motorcycle.getOdo());
+        motorcycleDTO.setSellerEmail(motorcycle.getSellerEmail());
         motorcycleDTO.setSellerUsername(motorcycle.getSeller().getUsername());
         motorcycleRepository.save(motorcycle);  
         return motorcycleDTO;

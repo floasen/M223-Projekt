@@ -19,8 +19,12 @@ public class Motorcycle {
     private String description;
     private String brand;
     private String model;
-    private boolean isSold = false;
-    private boolean isBlocked = false;
+    private double price;
+    private String date;
+    private int odo;
+    private boolean isSold;
+    private boolean isBlocked;
+    private String sellerEmail;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "seller_id")
@@ -28,11 +32,17 @@ public class Motorcycle {
 
     public Motorcycle() {}
 
-    public Motorcycle(String title, String description, String brand, String model, User seller) {
+    public Motorcycle(String title, String description, String brand, String model, double price, String date, int odo, String sellerEmail, User seller) {
         this.title = title;
         this.description = description;
         this.brand = brand;
         this.model = model;
+        this.price = price;
+        this.date = date;
+        this.odo = odo;
+        this.sellerEmail = sellerEmail;
         this.seller = seller;
+        
+        
     }
 }

@@ -3,7 +3,7 @@ const API_URL = "http://localhost:8080/";
 
 const login = (username, password) => {
     return axios
-        .post(API_URL + "login",
+        .post(API_URL + "api/auth/login",
             { username, password, })
         .then((response) => {
             if (response.data.username) {

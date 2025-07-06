@@ -11,4 +11,9 @@ public class MotorcycleCreateRequest {
     public String description;
     public String brand;
     public String model;
+    public double price;
+    public String date;
+    public int odo;
+    public String sellerEmail; 
+    public String sellerUsername;
 }

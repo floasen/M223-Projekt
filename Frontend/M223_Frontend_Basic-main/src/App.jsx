@@ -1,9 +1,8 @@
 import Layout from './modules/Layout'
-import Home from './modules/Home'
-import Public from './modules/Public'
-import About from './modules/About'
-import Login from './modules/Login'
-import NoPage from './modules/NoPage'
+import Home from './pages/Home'
+import Login from './pages/Login'
+import Signup from './pages/Signup'
+import NoPage from './pages/NoPage'
 import { Routes } from 'react-router-dom'
 import { Route } from 'react-router-dom'
 import './App.css'
@@ -13,9 +12,8 @@ function App() {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path="public" element={<Public />} />
-        <Route path="about" element={<About />} />
         <Route path="login" element={<Login />} />
+        <Route path="signupform" element={<Signup />} />  
         <Route path="*" element={<NoPage />} />
       </Route>
     </Routes>
