@@ -72,7 +72,7 @@ public class AuthController {
                     .body(new MessageResponse("Error: Username or password incorrect!"));
         }
     }
- 
+    @CrossOrigin
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {

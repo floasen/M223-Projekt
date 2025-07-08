@@ -45,7 +45,12 @@ public class MotorcycleService {
                 request.description,
                 request.brand,
                 request.model,
+                request.price,
+                request.date,
+                request.odo,
+                request.sellerEmail,
                 currentUser
+                
         ); 
             Motorcycle saveMotorcycle = motorcycleRepository.save(motorcycle);
             return toDto(saveMotorcycle);
@@ -64,6 +69,10 @@ public class MotorcycleService {
         motorcycle.setDescription(request.description);
         motorcycle.setBrand(request.brand);
         motorcycle.setModel(request.model);
+        motorcycle.setPrice(request.price);
+        motorcycle.setDate(request.date);
+        motorcycle.setOdo(request.odo);
+        motorcycle.setSellerEmail(request.sellerEmail);
 
         return toDto(motorcycleRepository.save(motorcycle));
     }
@@ -87,6 +96,13 @@ public class MotorcycleService {
         motorcycle.setBlocked(true);
         motorcycleRepository.save(motorcycle);
     }
+    @Transactional
+      public void unblockMotorcycle(Long id) {
+        Motorcycle motorcycle = motorcycleRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Not found"));
+        motorcycle.setBlocked(false);
+        motorcycleRepository.save(motorcycle);
+      }
 
     private MotorcycleDTO toDto(Motorcycle motorcycle){
         MotorcycleDTO motorcycleDTO = new MotorcycleDTO();
@@ -95,6 +111,10 @@ public class MotorcycleService {
         motorcycleDTO.setDescription(motorcycle.getDescription());
         motorcycleDTO.setBrand(motorcycle.getBrand());
         motorcycleDTO.setModel(motorcycle.getModel());  
+        motorcycleDTO.setPrice(motorcycle.getPrice());
+        motorcycleDTO.setDate(motorcycle.getDate());
+        motorcycleDTO.setOdo(motorcycle.getOdo());
+        motorcycleDTO.setSellerEmail(motorcycle.getSellerEmail());
         motorcycleDTO.setSellerUsername(motorcycle.getSeller().getUsername());
         motorcycleRepository.save(motorcycle);  
         return motorcycleDTO;

@@ -3,7 +3,7 @@ const API_URL = "http://localhost:8080/";
 
 const login = (username, password) => {
     return axios
-        .post(API_URL + "login",
+        .post(API_URL + "api/auth/login",
             { username, password, })
         .then((response) => {
             if (response.data.username) {
@@ -15,6 +15,22 @@ const login = (username, password) => {
             console.log(error);
             throw error;
         })
+};
+const signup = (username, email, password) => {
+    return axios
+        .post(API_URL + "api/auth/signup", {
+            username,
+            email,
+            password,
+            roles: ["user"],
+        })
+        .then((response) => {
+            return response.data;
+        })
+        .catch((error) => {
+            console.error("Signup error:", error);
+            throw error;
+        });
 };
 const logout = () => {
     localStorage.removeItem("user");
@@ -28,5 +44,6 @@ const AuthService = {
     login,
     logout,
     getCurrentUser,
+    signup,
 }
 export default AuthService;

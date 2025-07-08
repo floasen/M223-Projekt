@@ -11,7 +11,10 @@ public class MotorcycleDTO {
     public String description;
     public String brand;
     public String model;
-    public boolean isSold;
+    public double price;
+    public String date;
+    public int odo;
     public boolean isBlocked;
+    public String sellerEmail;
     public String sellerUsername;
 }

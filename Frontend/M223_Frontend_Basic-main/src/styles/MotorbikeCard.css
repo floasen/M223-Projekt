@@ -1,0 +1,69 @@
+.motorbike-card {
+  background-color: #1a1a1a;
+  color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: space-between;
+}
+
+.motorbike-card h3 {
+  margin: 0;
+}
+
+.motorbike-card .left-column {
+  width: 25%; /* Marke und Modell sind in einer schmalen Spalte */
+}
+
+.motorbike-card .right-column {
+  width: 70%; /* Die rechte Spalte nimmt den Großteil des Platzes ein */
+  display: flex;
+  flex-direction: column;
+}
+
+.right-column .top-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.right-column .info-left,
+.right-column .info-right {
+  flex: 1;
+  padding: 0 15px; /* Abstand zwischen den beiden Info-Sektionen */
+}
+
+.right-column .info-right {
+  text-align: right; /* Text auf der rechten Seite ausrichten */
+}
+
+.right-column p {
+  margin: 5px 0;
+}
+
+.description {
+  flex-grow: 1; /* Beschreibung nimmt den verbleibenden Platz ein */
+  margin-left: 20px; /* Abstand zwischen den Details und der Beschreibung */
+}
+
+.buttons {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.button {
+  background-color: #ff5722;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: #e64a19;
+}

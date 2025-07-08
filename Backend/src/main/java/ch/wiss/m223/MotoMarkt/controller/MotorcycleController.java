@@ -63,4 +63,9 @@ public class MotorcycleController {
     public void block(@PathVariable Long id) {
         motorcycleService.blockMotorcycle(id);
     }
+
+    @PatchMapping("/{id}/unblock")
+    public void unblock(@PathVariable Long id) {
+        motorcycleService.unblockMotorcycle(id);
+    }   
 }
