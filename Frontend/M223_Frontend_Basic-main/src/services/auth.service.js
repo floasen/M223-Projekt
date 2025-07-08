@@ -16,6 +16,22 @@ const login = (username, password) => {
             throw error;
         })
 };
+const signup = (username, email, password) => {
+    return axios
+        .post(API_URL + "api/auth/signup", {
+            username,
+            email,
+            password,
+            roles: ["user"],
+        })
+        .then((response) => {
+            return response.data;
+        })
+        .catch((error) => {
+            console.error("Signup error:", error);
+            throw error;
+        });
+};
 const logout = () => {
     localStorage.removeItem("user");
 };
@@ -28,5 +44,6 @@ const AuthService = {
     login,
     logout,
     getCurrentUser,
+    signup,
 }
 export default AuthService;

@@ -3,6 +3,9 @@ package ch.wiss.m223.MotoMarkt.model;
 import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
+
+import org.hibernate.annotations.Cascade;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,6 +29,7 @@ public class Motorcycle {
     private boolean isBlocked;
     private String sellerEmail;
 
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "seller_id")
     private User seller;

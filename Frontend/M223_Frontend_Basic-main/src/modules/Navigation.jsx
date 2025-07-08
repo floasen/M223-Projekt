@@ -8,20 +8,28 @@ export default function Navigation() {
         <li>
           <a href="/">Home</a>
         </li>
-        <li>
-          <a href="/signupform">Signup</a>
-        </li>
 
+        <li>
+          <a href="/favorites">Favorites</a>
+        </li>
         {AuthService.getCurrentUser() ? (
           <>
           <li>
-            <a href="/logout">Logout</a>
-          </li>
+          <a href="/account">Account</a>
+        </li>
+        <li>
+          <a href="Logout">Logout</a>
+        </li>
           </>
         ):(
-        <li>
-          <a href="/login">Login</a>
-        </li>
+          <>
+            <li>
+              <a href="/login">Login</a>
+            </li>
+            <li>
+              <a href="/signupform">Signup</a>
+            </li>
+          </>
         )}
       </ul>
     </nav>

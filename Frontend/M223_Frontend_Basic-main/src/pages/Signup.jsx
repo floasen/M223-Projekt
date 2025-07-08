@@ -6,11 +6,13 @@ export default function SignupForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await api("/api/auth/signup", "POST", {
-      ...form,
-      roles: ["user"],
-    });
-    alert("Signup erfolgreich!");
+    try {
+      await AuthService.signup(form.username, form.email, form.password);
+      alert("Signup erfolgreich!");
+    } catch (error) {
+      alert("Signup fehlgeschlagen. Bitte versuche es erneut.");
+      console.error(error);
+    }
   };
 
   return (
